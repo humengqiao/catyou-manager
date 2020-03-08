@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+  production-manager:
+    image: production-manager:latest
+    ports:
+      - "127.0.0.1:8888:80"
+    volumes:
+      - type: volume
+        source: production-manager-volume
+        target: /tmp
+        volume:
+          nocopy: true
+    deploy:
+      replicas: 5
+      update_config:
+        monitor: 5s
+        parallelism: 2
+        delay: 5s
+      restart_policy:
+        delay: 5s
+        max_attempts: 10
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 200M
+        reservations:
+          cpus: "0.2"
+          memory: 50M
+volumes:
+  production-manager-volume:
+    external: true

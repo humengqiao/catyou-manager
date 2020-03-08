@@ -1,0 +1,87 @@
+{
+  "name": "production-manager",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "1. a production in and out coming manager",
+  "author": "humengqiao",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "docker:build": "docker build -t production-manager .",
+    "docker:deploy": "bash ./scripts/deploy.sh",
+    "docker:deploy-latest": "bash ./scripts/deploy.sh latest",
+    "docker:dev": "docker stack deploy -c ./docker/docker-stack.yml",
+    "docker:dev-update": "docker service update --force --image production-manager:latest production-manager_production-manager",
+    "docker:push": "yarn docker:tag && docker push humengqiao/production-manager:latest",
+    "docker:rm-dangling": "bash ./scripts/rm-dangling.sh",
+    "docker:run": "docker pull humengqiao/production-manager:latest && docker run -itd --name production-manager -p 8888:80 production-manager:latest",
+    "docker:tag": "docker tag production-manager humengqiao/production-manager:latest",
+    "electron:build-all": "vue-cli-service electron:build -mwl",
+    "electron:build-mac": "vue-cli-service electron:build --mac",
+    "electron:build-win": "vue-cli-service electron:build --win --x64",
+    "electron:build-linux": "vue-cli-service electron:build --linux",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+		"postuninstall": "electron-builder install-app-deps",
+		"postelectron:build-*": "node ./scripts/build-update-desc"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "core-js": "^3.4.4",
+    "echarts": "^4.6.0",
+    "element-ui": "^2.13.0",
+    "fs-extra": "^8.1.0",
+    "good-storage": "^1.1.0",
+    "leancloud-storage": "^4.2.0",
+    "uuid": "^3.3.3",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.2",
+    "vuex-persist": "^2.2.0",
+    "xlsx": "^0.15.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "babel-eslint": "^10.0.3",
+    "babel-plugin-component": "^1.1.1",
+    "electron": "^6.0.0",
+    "electron-builder": "22.0",
+    "electron-updater": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-electron-builder": "^1.4.4",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": 0,
+      "no-debugger": 0,
+      "no-unsafe-finally": 0
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "electronDownload": {
+    "mirror": "https://npm.taobao.org/mirrors/electron/"
+  },
+  "main": "background.js"
+}
