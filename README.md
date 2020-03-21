@@ -12,6 +12,7 @@
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/humengqiao/production-manager/2020-02-06)
 ![GitHub stars](https://img.shields.io/github/stars/humengqiao/production-manager?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/humengqiao/production-manager?style=social)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/humengqiao/production-manager)
 
 ## Project setup
 ```
