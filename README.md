@@ -5,6 +5,10 @@
 ![GitHub commit merge status](https://img.shields.io/github/commit-status/humengqiao/production-manager/master/HEAD)
 ![GitHub issues](https://img.shields.io/github/issues/humengqiao/production-manager)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/humengqiao/production-manager)
+![GitHub top language](https://img.shields.io/github/languages/top/humengqiao/production-manager)
+![GitHub language count](https://img.shields.io/github/languages/count/humengqiao/production-manager)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/humengqiao/production-manager)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/humengqiao/production-manager/2020-02-06)
 
 ## Project setup
 ```
