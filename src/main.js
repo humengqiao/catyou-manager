@@ -10,6 +10,7 @@ import services from '@services'
 import store from '@store'
 import utils from '@utils'
 import themes from '@themes'
+import silentMourning from '@/activitys/silentMourning';
 
 Vue.use(element)
 Vue.use(directives)
@@ -18,6 +19,7 @@ Vue.use(services)
 Vue.use(utils)
 Vue.use(themes)
 services.init()
+silentMourning.bootstrap()
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts

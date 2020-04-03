@@ -16,7 +16,15 @@ module.exports = {
       .set('@services', resolve('src/services'))
       .set('@utils', resolve('src/utils'))
       .set('@store', resolve('src/store'))
-      .set('@themes', resolve('src/themes'))
+			.set('@themes', resolve('src/themes'))
+
+		config
+			.module
+			.rule('abc')
+			.resourceQuery(/blockType=abc/)
+			.type('javascript/auto')
+			.use('abc')
+			.loader(require.resolve('./loaders/abc-loader.js'))
   },
   pluginOptions: {
     electronBuilder: {

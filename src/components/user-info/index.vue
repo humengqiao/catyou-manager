@@ -238,7 +238,7 @@ export default {
 				position relative
 				width 50px
 				height 50px
-	
+
 				.avatar-badge
 					height 100%
 
@@ -262,7 +262,7 @@ export default {
 			& >>> .el-drawer__header
 				[role="heading"],
 				.el-drawer__close-btn > .el-icon-close
-					font-size 20px			
+					font-size 20px
 
 			.user-info-list-container
 				margin 0 30px

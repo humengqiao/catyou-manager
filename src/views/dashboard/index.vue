@@ -35,7 +35,7 @@ export default {
 		display flex
 		flex-direction row
 		height 100%
-		
+
 		.sider-container
 			display flex
 			flex-direction column
@@ -50,7 +50,7 @@ export default {
 				& >>> .el-menu-item [class^="el-icon"]
 					margin-top 5px
 					font-size 18px !important
-		
+
 		.router-content-container
 			flex 1
 </style>

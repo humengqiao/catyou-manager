@@ -1,4 +1,4 @@
-<template>
+<template lang="ejs">
   <div id="app">
     <router-view></router-view>
 		<!-- 更新可用弹框 -->
