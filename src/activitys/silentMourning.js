@@ -1,6 +1,6 @@
 export default {
 	bootstrap() {
-		window.mourningTimer = setInterval(() => {
+		const check = () => {
 			// 如果为2020-04-04
 			const date = new Date()
 			const year = date.getFullYear()
@@ -20,6 +20,10 @@ export default {
 					document.documentElement.classList.remove('silent-mourning')
 				}
 			}
-		}, 1000 * 60)
+		}
+
+		window.mourningTimer = setInterval(check, 1000 * 60)
+
+		check()
 	}
 }
