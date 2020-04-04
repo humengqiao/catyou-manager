@@ -12,8 +12,8 @@ export default {
 					document.documentElement.classList.add('silent-mourning')
 				}
 			}else {
-				if(year > 2020 || (year === 2020 && (month + 1) > 4) || (year === 2020 && (month + 1) > 4 && day > 4)) {
-					return clearInterval(window.mourningTimer)
+				if(year > 2020 || (year === 2020 && (month + 1) > 4) || (year === 2020 && (month + 1) === 4 && day > 4)) {
+					clearInterval(window.mourningTimer)
 				}
 
 				if(document.documentElement.classList.contains('silent-mourning')) {
