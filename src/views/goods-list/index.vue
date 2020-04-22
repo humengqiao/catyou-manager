@@ -6,7 +6,7 @@
 				size="small"
 				@click="() => {
 					newProductionModal = true
-					opType = 'add'	
+					opType = 'add'
 				}">新建产品</el-button>
 			<!-- <el-button
 				type="info"
@@ -39,7 +39,7 @@
 							@click="onHandleClickEdit(scope.row)">编辑</span>
 						<span
 							style="color: #e98f8c;font-size: 12px;cursor: pointer;"
-							@click="onHandleClickDelete(scope.row)">删除</span>	
+							@click="onHandleClickDelete(scope.row)">删除</span>
 					</template>
 				</el-table-column>
 				<el-table-column
@@ -231,7 +231,7 @@
 								:key="index"
 								:label="item.label"
 								:value="item.value"
-								v-for="(item, index) in productionUnitList"></el-option>	
+								v-for="(item, index) in productionUnitList"></el-option>
 						</el-select>
 					</el-form-item>
 				</el-form-item>
@@ -241,7 +241,7 @@
 					<el-input
 						type="number"
 						v-model.number="form.count"
-						placeholder="请输入产品库存"></el-input>	
+						placeholder="请输入产品库存"></el-input>
 				</el-form-item>
 				<el-form-item label="产品图片：">
 					<el-upload
@@ -423,7 +423,7 @@
 					count: 1,
 					remark: '',
 					opType: ''
-				}	
+				}
 			}">
 			<div>
 				<el-form
@@ -855,7 +855,7 @@ export default {
 					productionName,
 					desc
 				}
-				
+
 				this.fetchProductionOutInComingList(objectId)
 				this.fetchProductionOutInComingGraphList(objectId)
 			}catch(error) {
@@ -1073,7 +1073,7 @@ export default {
 						createdAt: this.$utils.dateUtils.formatDate(new Date(item.createdAt)),
 						size: `${item.size}(${filterProductionUnit(item.unit, productionUnitList)})`
 					})))
-					
+
 					this.$utils.fileUtils.downloadExcel(exportHtml, `产品列表-${this.$utils.dateUtils.formatDate(new Date(), 'yyyy-MM-dd')}.xls`)
 				}
 			}catch(error) {
@@ -1125,7 +1125,7 @@ export default {
 					margin-right 5px
 					font-size 12px
 					cursor pointer
-			
+
 		& >>> .el-dialog__body
 			padding 35px
 
@@ -1192,6 +1192,7 @@ export default {
 				right 0
 				top 0
 				cursor pointer
+				font-size 20px
 
 	.add-edit-production-modal-container
 		& >>> .el-upload--picture-card i
