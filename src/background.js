@@ -1,4 +1,4 @@
-import { app, protocol, BrowserWindow, ipcMain, dialog } from "electron"
+import { app, protocol, BrowserWindow, ipcMain } from "electron"
 // import fs from 'fs-extra'
 import { autoUpdater } from "electron-updater"
 import {

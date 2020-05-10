@@ -45,7 +45,7 @@ export const login = params => {
           .then(result => {
             const avatarUrl= result.toJSON().url
             delete user.avatar
-          
+
             return {
               ...user,
               avatarUrl
@@ -88,7 +88,9 @@ export const checkServerUserData = params => {
 // 获取用户权限列表
 export const getPermissionList = params => {
   const query = new AV.Query('UserPermission')
-  return query.equalTo('username', params)
+	return query
+		.equalTo('username', params)
+		.ascending('sort')
     .find()
     .then(result => result.map(item => item.toJSON()))
 }
@@ -132,7 +134,7 @@ export const getAllPermissionList = params => {
 // 清空用户所有权限
 export const cleanAllPermission = params => {
   const query = new AV.Query('UserPermission')
-  
+
   return query.equalTo('username', params)
     .find()
     .then(result => result.map(item => item.toJSON()))
