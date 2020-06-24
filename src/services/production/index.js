@@ -1,15 +1,19 @@
 import AV from 'leancloud-storage/live-query'
 import store from '@store'
 import { formatDate } from '@utils/date'
+import { highlightColor } from '@config/common'
 
 // 产品列表查询
 export const getProductionList = (params = {
-  pageSize: 5,
-  currentPage: 1
+  pagination: {
+		pageSize: 5,
+		currentPage: 1
+	},
+	keyword: ''
 }, queryAll = false) => {
   const query = new AV.Query('Production')
   const queryCount = new AV.Query('Production')
-  const { pageSize, currentPage } = params
+  const { pagination: { pageSize, currentPage }, keyword } = params
   const { username } = store.state.global.user
 
   query.include('productionImg')
@@ -17,11 +21,12 @@ export const getProductionList = (params = {
     query.limit(pageSize)
     query.skip((currentPage - 1) * pageSize)
   }
-  
+
   query.descending('createdAt')
 
   return query
-    .equalTo('username', username)
+		.equalTo('username', username)
+		.contains('productionName', keyword)
     .find()
     .then(result => {
       return result.map(item => item.toJSON())
@@ -31,7 +36,10 @@ export const getProductionList = (params = {
         .count()
         .then(result => {
           const data = {
-            list,
+            list: list.map(item => ({
+							...item,
+							highlightProductionName: !keyword ? item.productionName : item.productionName.replace(new RegExp('(' + keyword + '+' + ')', 'g'), `<em style="color: ${highlightColor};font-size: 14px;text-decoration: underline;">$1</em>`)
+						})),
             pagination: {
               total: result,
               pageSize,
@@ -150,7 +158,7 @@ export const editProduction = production => {
 export const deleteProduction = ids => {
   const deleteObjList = []
   ids = typeof ids === 'string' ? [ids] : ids
-  
+
   // 查出要删除产品的所有产品图片id
   const query= new AV.Query('Production')
   ids.forEach(item => {
@@ -169,7 +177,7 @@ export const deleteProduction = ids => {
       }, [])
       deleteImgIds.forEach(item => deleteObjList.push(AV.File.createWithoutData(item)))
       result.forEach(({ objectId }) => deleteObjList.push(AV.Object.createWithoutData('Production', objectId)))
-      
+
       return await AV.Object.destroyAll(deleteObjList)
     })
 }
@@ -219,7 +227,7 @@ export const deleteProductionOutInComing = params => {
 
   // 先删除进销记录
   const productionOutInComingModel = AV.Object.createWithoutData('ProductionOutInComing', productionOutInComingId)
-  
+
   return productionOutInComingModel
     .destroy()
     .then(() => {
@@ -239,7 +247,7 @@ export const deleteProductionOutInComing = params => {
                   const { total } = result.toJSON()
                   const model = AV.Object.createWithoutData('ProductionOutInComing', id)
                   model.set('total', String(Number(total) + count))
-                  
+
                   return model.save()
                 })
             })
@@ -288,7 +296,7 @@ export const addProductionOutInComing = params => {
 
   const ProductionModel = AV.Object.createWithoutData('Production', productionId)
   ProductionModel.increment('count', opType === 'IN' ? count : opType === 'OUT' ? Number(`-${count}`) : 0)
-  
+
   return ProductionModel
     .save()
     .then(() => {
