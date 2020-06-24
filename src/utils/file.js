@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-01-12 21:20:25
+ * @LastEditTime: 2020-06-01 20:55:49
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /vue-common-tools/Users/humengqiao/Desktop/fe-project/production-manager/src/utils/file.js
+ */
 import { formatDate } from './date'
 import xlsx from 'xlsx'
 
@@ -24,11 +32,11 @@ export const importFile = (extensions = []) => {
         this.$message.error('无可导入的文件')
         return reject('用户取消')
       }
-      
+
       const file = files[0]
       const regexp = new RegExp(extensions.map(item => item.startsWith('.') ? `(${item})` : `.(${item})`).join('|') + '$')
       if(!regexp.test(file.name)) return this.$message.error('文件格式不正确')
-      
+
       resolve(file)
     }
 
@@ -52,7 +60,9 @@ export const importExcel = async (cb = () => {}) => {
         const data = event.target.result
         const workbook = xlsx.read(data, {
           type: 'binary'
-        })
+				})
+
+				console.log(workbook.Sheets)
 
         const json = []
         // 遍历每张表读取

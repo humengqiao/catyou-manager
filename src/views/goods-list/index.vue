@@ -16,6 +16,13 @@
 				size="small"
 				:loading="exportProductionListLoading"
 				@click="onHandleClickExportProductionList">导出产品Excel</el-button>
+			<el-input
+				v-model="productionKeyword"
+				class="search-box"
+				type="text"
+				placeholder="请输入产品名"
+				style="float: right;width: 250px;"
+				@keyup.enter.native="fetchProductionList"></el-input>
 		</div>
 		<title-section
 			title="产品列表"
@@ -54,7 +61,9 @@
 					prop="productionNo"></el-table-column>
 				<el-table-column
 					label="名称"
-					prop="productionName"></el-table-column>
+					prop="highlightProductionName">
+					<template slot-scope="scope"><span v-html="scope.row.highlightProductionName"></span></template>
+				</el-table-column>
 				<el-table-column
 					label="采购价(¥)"
 					prop="price"
@@ -629,7 +638,8 @@ export default {
 				opType: ''
 			},
 			productionOutInComingOpType: '',
-			productionOutInComingMaxCount: 0
+			productionOutInComingMaxCount: 0,
+			productionKeyword: ''
 		}
 	},
 	computed: {
@@ -670,8 +680,14 @@ export default {
 			this.productionLoading = true
 
 			try {
-				const paginationPayload = this.pagination
-				const result = await this.$service.productionService.getProductionList(paginationPayload)
+				const payload = {
+					pagination: {
+						...this.pagination
+					},
+					keyword: this.productionKeyword
+				}
+
+				const result = await this.$service.productionService.getProductionList(payload)
 				const { list, pagination } = result
 				this.list = [...list]
 				this.pagination = { ...pagination }
@@ -1103,6 +1119,12 @@ export default {
 		flex-direction column
 		height 100%
 		padding 20px
+
+		.op-container
+			.search-box
+				& >>> .el-input__inner
+					height 30px
+					line-height 30px
 
 		.table-container
 			flex 1
