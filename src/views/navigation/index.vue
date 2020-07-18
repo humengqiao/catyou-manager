@@ -43,7 +43,7 @@
 					<el-table-column
 						label="是否禁用"
 						width="80">
-						<template slot-scope="scope">{{ scope.row.disabled ? '是' : '否' }}</template>	
+						<template slot-scope="scope">{{ scope.row.disabled ? '是' : '否' }}</template>
 					</el-table-column>
 					<el-table-column label="更新时间">
 						<template slot-scope="scope">{{ $utils.dateUtils.formatDate(new Date(scope.row.updatedAt)) }}</template>
@@ -124,6 +124,14 @@
 						v-model="form.disabled"
 						active-text="禁用"
 						inactive-text="不禁用"></el-switch>
+				</el-form-item>
+				<el-form-item
+					label="备注："
+					prop="remark">
+					<el-input
+						v-model="form.remark"
+						:rows="3"
+						placeholder="请输入备注"></el-input>
 				</el-form-item>
 			</el-form>
 			<span
@@ -209,7 +217,7 @@ export default {
 	computed: {
 		navigationAddOrEditTitle() {
 			const opType = this.opType
-			
+
 			if(opType === 'add') return '新增导航'
 			if(opType === 'edit') return '修改导航'
 			return ''
@@ -330,7 +338,7 @@ export default {
 
 				await this.$service.navigationService.deleteNavigation(payload)
 				this.$message.success('导航删除成功')
-				
+
 				this.navigation = {
 					currentPage: 1,
 					pageSize: 10,
