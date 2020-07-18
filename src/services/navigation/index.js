@@ -5,7 +5,7 @@ export const getNavigationList = params => {
   const { currentPage, pageSize } = params
   const query = new AV.Query('PermissionList')
   const countQuery = new AV.Query('PermissionList')
-  
+
   return countQuery.count()
     .then(count => {
       return query.limit(pageSize)
@@ -31,14 +31,16 @@ export const addNavigation = params => {
     path,
     show,
     icon,
-    disabled
+		disabled,
+		remark
   } = params
 
   PermissionModel.set('name', name)
   PermissionModel.set('path', path)
   PermissionModel.set('show', show)
   PermissionModel.set('icon', icon)
-  PermissionModel.set('disabled', disabled)
+	PermissionModel.set('disabled', disabled)
+	PermissionModel.set('remark', remark)
 
   return PermissionModel.save()
 }
@@ -50,7 +52,8 @@ export const editNavigation = params => {
     path,
     show,
     icon,
-    disabled,
+		disabled,
+		remark,
     external: {
       orignalPath,
       objectId
@@ -63,7 +66,8 @@ export const editNavigation = params => {
   model.set('path', path)
   model.set('show', show)
   model.set('icon', icon)
-  model.set('disabled', disabled)
+	model.set('disabled', disabled)
+	model.set('remark', remark)
 
   return model.save()
     .then(() => {

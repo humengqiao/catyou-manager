@@ -197,7 +197,8 @@ export default {
 				path: '',
 				show: true,
 				icon: '',
-				disabled: false
+				disabled: false,
+				remark: ''
 			},
 			rules: {
 				name: [
@@ -255,7 +256,8 @@ export default {
 				path: '',
 				show: true,
 				icon: '',
-				disabled: false
+				disabled: false,
+				remark: ''
 			}
 		},
 		async onHandleConfirmAddOrEditNavigation() {
@@ -304,13 +306,14 @@ export default {
 			}
 		},
 		onHandleClickEditNavigation(row) {
-			const { name, path, icon, show, disabled, objectId } = row
+			const { name, path, icon, show, disabled, objectId, remark } = row
 			this.form = {
 				name,
 				path,
 				icon,
 				show,
 				disabled,
+				remark,
 				external: {
 					orignalPath: path,
 					objectId
