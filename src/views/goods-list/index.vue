@@ -673,6 +673,7 @@ export default {
 		})
 	},
 	mounted() {
+		debugger
 		this.fetchProductionList()
 	},
 	methods: {
@@ -692,6 +693,7 @@ export default {
 				this.list = [...list]
 				this.pagination = { ...pagination }
 			}catch(error) {
+				console.log(error)
 				this.$message.error(error)
 			}finally {
 				this.productionLoading = false

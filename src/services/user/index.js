@@ -63,7 +63,7 @@ export const login = params => {
 // 更新用户信息
 export const updateUser = params => {
   const { key, value } = params
-  const userId = store.state.global.user.objectId
+  const userId = (store.__esModule ? store.default : store).state.global.user.objectId
   const UserModel = AV.Object.createWithoutData('_User', userId)
   if(params.constructor === Array) {
     params.forEach(({ key, value }) => {

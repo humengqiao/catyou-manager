@@ -18,7 +18,7 @@ export const checkUpcExist = (params, equalKey = '') => {
         const list = result
           .filter(item => !!item)
           .map(item => item.toJSON())
-        
+
         return list
       }
     })
@@ -27,7 +27,7 @@ export const checkUpcExist = (params, equalKey = '') => {
 // 新增upc
 export const addUpc = params => {
   params = params.constructor !== Array ? [params] : params
-  
+
   // 查询upc是否存在
   return checkUpcExist(params, 'upc')
     .then(result => {
@@ -35,7 +35,7 @@ export const addUpc = params => {
         1. result值不为空，表示存在记录，此时需要判断如果是存在，则判断upc对应的sku值是否为空，为空则去修改，不为空则不作处理
         2. result值为空，则直接新增
       */
-      const { username } = store.state.global.user
+      const { username } = (store.__esModule ? store.default : store).state.global.user
       const models = params.map(({ upc, sku }) => {
         const UpcModel = new AV.Object('Upc')
 
@@ -77,7 +77,7 @@ export const getUpcList = (params = {
   const queryCount = new AV.Query('Upc')
   const query = new AV.Query('Upc')
   const { pageSize, currentPage } = params
-  const { username } = store.state.global.user
+  const { username } = (store.__esModule ? store.default : store).state.global.user
 
   return queryCount.count()
     .then(total => {

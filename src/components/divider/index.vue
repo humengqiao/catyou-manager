@@ -3,10 +3,6 @@
 </template>
 
 <script>
-import store from '@/store'
-
-console.log(store)
-
 export default {
 	name: 'Divider'
 }

@@ -13,8 +13,8 @@ export const getProductionList = (params = {
 }, queryAll = false) => {
   const query = new AV.Query('Production')
   const queryCount = new AV.Query('Production')
-  const { pagination: { pageSize, currentPage }, keyword } = params
-  const { username } = store.state.global.user
+	const { pagination: { pageSize, currentPage }, keyword } = params
+  const { username } = (store.__esModule ? store.default : store).state.global.user
 
   query.include('productionImg')
   if(!queryAll) {
@@ -65,7 +65,7 @@ export const getUnitList = () => {
 
 // 产品新增
 export const addProduction = production => {
-  const { username } = store.state.global.user
+  const { username } = (store.__esModule ? store.default : store).state.global.user
   const ProductionModel = new AV.Object('Production')
   const {
     productionName,

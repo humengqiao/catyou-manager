@@ -97,7 +97,7 @@ const getRouterFullPath = routerConfig => {
       prev.push(next.path)
 
       if(next.children && next.children.length > 0) {
-        prev.push(...getRouterFullPath(next.children.map(item => ({...item, path: item.path.startsWith('/') ? item.path : `${next.path}/${item.path}`})))) 
+        prev.push(...getRouterFullPath(next.children.map(item => ({...item, path: item.path.startsWith('/') ? item.path : `${next.path}/${item.path}`}))))
       }
 
       return prev
@@ -113,7 +113,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // eslint-disable-next-line
-  const { user, permissionList } = store.state.global
+  const { user, permissionList } = (store.__esModule ? store.default : store).state.global
   if(to.path === '/login') return next()
 
   if(!user) {
