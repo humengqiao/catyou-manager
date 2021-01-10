@@ -1,11 +1,46 @@
 const path = require('path')
 const feedUrl = require('./src/config/app-update').feedUrl
+const RuleSet = require('webpack/lib/RuleSet')
 
 const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
+class TestPlugin {
+	apply(compiler) {
+		compiler.hooks.compilation.tap('testPlugin', compilation => {
+			const rawRules = compiler.options.module.rules
+			const { rules } = new RuleSet(rawRules)
+			const createMatcher = (fakeFile) => {
+				return (rule, i) => {
+					// #1201 we need to skip the `include` check when locating the vue rule
+					const clone = Object.assign({}, rule)
+					delete clone.include
+					const normalized = RuleSet.normalizeRule(clone, {}, '')
+					console.log(normalized)
+					return (
+						!rule.enforce &&
+						normalized.resource &&
+						normalized.resource(fakeFile)
+					)
+				}
+			}
+
+			let vueRuleIndex = rawRules.findIndex(createMatcher(`foo.vue`))
+			console.log(vueRuleIndex)
+			if (vueRuleIndex < 0) {
+				vueRuleIndex = rawRules.findIndex(createMatcher(`foo.vue.html`))
+			}
+			const vueRule = rules[vueRuleIndex]
+			console.log(vueRule)
+		})
+	}
+}
+
+console.log(process.env)
+
 module.exports = {
+  publicPath: process.env.VUE_BUILD_TARGET === 'gh-pages' ? '/production-manager' : '/',
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
@@ -25,7 +60,11 @@ module.exports = {
 			.type('javascript/auto')
 			.use('abc')
 			.loader(require.resolve('./loaders/abc-loader.js'))
-  },
+
+		config
+			.plugin('testPlugin')
+			.use(TestPlugin)
+	},
   pluginOptions: {
     electronBuilder: {
       builderOptions: {

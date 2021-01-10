@@ -10,7 +10,7 @@ import services from '@services'
 import store from '@store'
 import utils from '@utils'
 import themes from '@themes'
-import mourning_2020404 from '@/activitys/2020-04-04-mourning';
+import mourning_2020404 from '@/activitys/2020-04-04-mourning'
 
 Vue.use(element)
 Vue.use(directives)
@@ -26,8 +26,8 @@ Vue.prototype.$echarts = echarts
 
 new Vue({
   router,
-  store,
-  render: h => h(App)
+	store,
+	render: h => h(App)
 }).$mount('#app')
 
 

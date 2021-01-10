@@ -25,7 +25,9 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps && patch-package",
     "postuninstall": "electron-builder install-app-deps",
-    "postelectron:build-*": "node ./scripts/build-update-desc"
+    "postelectron:build-*": "node ./scripts/build-update-desc",
+    "build:gh-pages": "vue-cli-service build --mode gh-pages",
+    "deploy:gh-pages": "rimraf docs && npm run build:gh-pages && sync-glob dist/ docs/"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -62,6 +64,7 @@
     "style-loader": "^1.1.3",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
+    "sync-glob": "^1.4.0",
     "vue-cli-plugin-electron-builder": "^1.4.4",
     "vue-template-compiler": "^2.6.10",
     "webpack-cli": "^3.3.11"

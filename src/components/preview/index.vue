@@ -5,43 +5,53 @@
 			:data-preview-id="id"
 			class="container"
 			@click="onHandleClickModal">
-				<div class="inner-container">
-					<div class="preview-container">
-						<div
-							v-loading="loading"
-							class="preview-inner-container"
-							@click.stop>
-							<img
-								v-if="!error"
-								class="big-img"
-								:src="currentProductionUrl"
-								alt="产品图片"
-								@load="onHandleLoad"
-								@error="onHandleLoadError">
-							<img
-								v-else
-								:src="errorImg"
-								alt="加载失败">
-						</div>
-						<div class="indicator-container">
-							<span class="current">{{ index }}</span>
-							<span>/</span>
-							<span class="total">{{ total }}</span>
-						</div>
-						<div class="prev-next-container">
+			<div class="inner-container">
+				<div class="content-container">
+					<transition
+						v-if="visible"
+						appear
+						@before-enter="beforeEnter"
+						@enter="enter"
+						:css="false">
+						<div class="preview-container">
 							<div
-								class="btn prev-btn"
-								@click.stop="index > 1 && index--">
-								<i class="el-icon-arrow-left"></i>
+								v-if="visible"
+								v-loading="loading"
+								class="preview-inner-container"
+								@click.stop>
+								<img
+									v-if="!error"
+									class="big-img"
+									:src="currentProductionUrl"
+									alt="产品图片"
+									@load="onHandleLoad"
+									@error="onHandleLoadError">
+								<img
+									v-else
+									:src="errorImg"
+									alt="加载失败">
+								</div>
+							<div class="indicator-container">
+								<span class="current">{{ index }}</span>
+								<span>/</span>
+								<span class="total">{{ total }}</span>
 							</div>
-							<div
-								class="btn next-btn"
-								@click.stop="index < total && index++">
-								<i class="el-icon-arrow-right"></i>
+							<div class="prev-next-container">
+								<div
+									class="btn prev-btn"
+									@click.stop="index > 1 && index--">
+									<i class="el-icon-arrow-left"></i>
+								</div>
+								<div
+									class="btn next-btn"
+									@click.stop="index < total && index++">
+									<i class="el-icon-arrow-right"></i>
+								</div>
 							</div>
 						</div>
-					</div>
+					</transition>
 				</div>
+			</div>
 		</div>
 	</transition>
 </template>
@@ -52,6 +62,14 @@ import uuid from 'uuid/v4'
 export default {
 	name: 'Preview',
 	props: {
+		position: {
+			type: Object,
+			default: () => ({})
+		},
+		size: {
+			type: Object,
+			default: () => ({})
+		},
 		url: {
 			required: true,
 			type: [String, Array],
@@ -98,6 +116,28 @@ export default {
 		onHandleLoadError() {
 			this.loading = false
 			this.error = true
+		},
+		beforeEnter(el) {
+			el.style = `
+				position: absolute;
+				left: ${this.position.left}px;
+				top: ${this.position.top}px;
+				width: ${this.size.width}px;
+				height: ${this.size.height}px;
+			`
+		},
+		enter(el, done) {
+			el.style = `
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 40%;
+				height: 100%;
+				transform: translate3d(-50%, -50%, 0);
+			`
+			el.addEventListener('transitionend', () => {
+				done()
+			})
 		}
 	}
 }
@@ -114,61 +154,65 @@ export default {
 
 		.inner-container
 			height 100%
+			padding 100px 0
 			background rgba(0, 0, 0, .5)
 
-			.preview-container
+			.content-container
 				position relative
-				display flex
-				flex-direction column
-				width 40%
 				height 100%
-				margin 0 auto
-				padding 100px 0
 
-				.preview-inner-container
+				.preview-container
+					position relative
 					display flex
-					justify-content center
-					align-items center
-					flex 1
-					height 0
-					border-radius 5px
-					border 1px solid #ccc
-					background #fff
-					box-shadow 0 2px 12px 0 rgba(0, 0, 0, .1)
+					flex-direction column
+					width 40%
+					height 100%
+					margin 0 auto
 
-					.big-img
-						width 100%
-						height 100%
+					.preview-inner-container
+						display flex
+						justify-content center
+						align-items center
+						flex 1
+						height 0
+						border-radius 5px
+						border 1px solid #ccc
+						background #fff
+						box-shadow 0 2px 12px 0 rgba(0, 0, 0, .1)
 
-				.indicator-container
-					margin-top 5px
-					text-align center
-					color #fff
+						.big-img
+							width 100%
+							height 100%
 
-					& *
-						font-size 16px
-
-					.current
-						margin-right 3px
-					
-					.total
-						margin-left 3px
-				
-				.prev-next-container
-					.btn
-						position absolute
-						top 50%
-						font-size 50px
-						transform translateY(-50%)
+					.indicator-container
+						margin-top 5px
+						text-align center
 						color #fff
-						cursor pointer
 
-						& >>> [class^="el-icon"]
-							font-size 50px							
+						& *
+							font-size 16px
 
-						&.prev-btn
-							left -60px
-						
-						&.next-btn
-							right -60px
+						.current
+							margin-right 3px
+
+						.total
+							margin-left 3px
+
+					.prev-next-container
+						.btn
+							position absolute
+							top 50%
+							font-size 50px
+							transform translateY(-50%)
+							color #fff
+							cursor pointer
+
+							& >>> [class^="el-icon"]
+								font-size 50px
+
+							&.prev-btn
+								left -60px
+
+							&.next-btn
+								right -60px
 </style>

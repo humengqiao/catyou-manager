@@ -3,9 +3,11 @@ import { Message } from 'element-ui'
 import Preview from '@components/preview'
 
 const handleClick = function(binding) {
+	const el = this
+
   return function() {
     const urls = binding.value
-    
+
     if(urls.length === 0) {
       return Message({
         type: 'error',
@@ -13,28 +15,40 @@ const handleClick = function(binding) {
       })
     }
 
-    const PreviewConstructor = Vue.extend(Preview)
-    const component = new PreviewConstructor({
-      propsData: {
-        url: urls,
-        visible: true
-      }
-    }).$mount()
+    Vue.nextTick(() => {
+			const { left, top, width, height } = el.getBoundingClientRect()
 
-    const $el = component.$el
+			const PreviewConstructor = Vue.extend(Preview)
+			const component = new PreviewConstructor({
+				propsData: {
+					url: urls,
+					visible: true,
+					position: {
+						left,
+						top
+					},
+					size: {
+						width,
+						height
+					}
+				}
+			}).$mount()
 
-    component.$on('close', () => {
-      component.visible = false
-    })
+			const $el = component.$el
 
-    document.body.appendChild($el)
+			component.$on('close', () => {
+				component.visible = false
+			})
+
+			document.body.appendChild($el)
+		})
   }
 }
 
 export default Vue => {
   Vue.directive('preview', {
     bind(el, binding) {
-      el.addEventListener('click', handleClick(binding), false)
+      el.addEventListener('click', handleClick.call(el, binding), false)
     },
     unbind(el) {
       el.removeEventListener('click', handleClick)
