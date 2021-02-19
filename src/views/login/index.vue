@@ -6,7 +6,7 @@
 		<component
 			v-if="effectComponent"
 			:is="effectComponent"></component>
-		<h2 class="system-name">产品进销存管理系统</h2>
+		<h2 class="system-name">Cat You Manager</h2>
 		<div class="login-container">
 			<el-form
 				ref="loginFormRef"
@@ -18,7 +18,7 @@
 					label="用户名："
 					prop="username">
 					<el-input
-						:class="['input', {
+						:class="['input', `login-input-hover-${bgIndex}`, {
 							shaking: isUsernameError
 						}]"
 						v-model="form.username"
@@ -26,13 +26,13 @@
 						@animationend.native="isUsernameError = false"></el-input>
 				</el-form-item>
 				<el-form-item
-					class="input-item-container"
+					class="input-item-container password"
 					label="密码："
 					prop="password">
 					<div class="password-input-container">
 						<el-input
 							:type="ifViewPassword ? 'text' : 'password'"
-							:class="['input', {
+							:class="['input', `login-input-hover-${bgIndex}`, {
 								shaking: isPasswordError
 							}]"
 							v-model="form.password"
@@ -45,6 +45,11 @@
 							@click="ifViewPassword = !ifViewPassword"></i>
 					</div>
 				</el-form-item>
+				<div class="operator-btn-box">
+					<span
+						class="reset-password-btn"
+						@click="isShowResetPasswordModal = !isShowResetPasswordModal">忘记密码？</span>
+				</div>
 				<div class="login-btn-container">
 					<div
 						:class="['login-btn', {
@@ -59,6 +64,38 @@
 				</div>
 			</el-form>
 		</div>
+		<!-- 重置密码弹框 -->
+		<el-dialog
+			class="reset-password-modal"
+			title="重置密码"
+			width="35%"
+			:visible.sync="isShowResetPasswordModal">
+			<el-alert
+				title="输入电子邮箱地址收到邮件后去邮件里的链接网站完成重置操作"
+				type="warning"></el-alert>
+			<el-form
+				ref="resetPasswordFormRef"
+				:model="resetPasswordModel"
+				:rules="resetPasswordFormRules">
+				<el-form-item
+					prop="email"
+					class="form-item-box"
+					label="电子邮箱: "
+					required>
+					<el-input
+						v-model="resetPasswordModel.email"
+						placeholder="请输入"></el-input>
+				</el-form-item>
+			</el-form>
+			<div class="btn-box">
+				<el-button
+					type="danger"
+					@click="isShowResetPasswordModal = false">取消</el-button>
+				<el-button
+					type="primary"
+					@click="onHandleClickSubmitResetPasswordForm">确定</el-button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -97,6 +134,25 @@ export default {
 					{
 						required: true,
 						trigger: 'blur'
+					}
+				]
+			},
+			isShowResetPasswordModal: false,
+			resetPasswordModel: {
+				email: ''
+			},
+			resetPasswordFormRules: {
+				email: [
+					{
+						required: true, message: '请输入电子邮箱', trigger: 'blur'
+					},
+					{
+						validator: (rule, value, callback) => {
+							if(!value) return callback(new Error('电子邮箱不能为空'))
+							if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value)) return callback(new Error('电子邮箱格式不正确'))
+
+							return callback()
+						}, trigger: 'blur'
 					}
 				]
 			}
@@ -166,6 +222,20 @@ export default {
 				this.isCircling = true
 			}
 		},
+		onHandleClickSubmitResetPasswordForm() {
+			this.$refs.resetPasswordFormRef.validate(async valid => {
+				if(!valid) return
+
+				try {
+					const email = this.resetPasswordModel.email
+					await this.$service.userService.resetPasswordByEmail(email)
+					this.$message.success('邮件发送成功')
+					this.isShowResetPasswordModal = false
+				}catch(error) {
+					this.$message.error(error)
+				}
+			})
+		},
 		...mapActions(['login'])
 	}
 }
@@ -208,7 +278,10 @@ export default {
 
 				& >>> .el-form-item__error
 					display none
-				
+
+				&.password
+					margin-bottom 0
+
 				.password-input-container
 					position relative
 
@@ -226,7 +299,7 @@ export default {
 					@keyframes shaking
 						0%
 							transform translateX(0px)
-						
+
 						50%
 							transform translateX(10px)
 
@@ -235,6 +308,19 @@ export default {
 
 					&.shaking
 						animation shaking .3s ease 3
+
+			.operator-btn-box
+				display flex
+				flex-direction row
+				justify-content flex-end
+				margin 0 40px
+				color #fff
+
+				.reset-password-btn
+					cursor pointer
+
+					&:hover
+						text-decoration underline
 
 			.login-btn-container
 				display flex
@@ -254,8 +340,11 @@ export default {
 					color #fff
 					text-align center
 					cursor pointer
-					transition width .3s ease, background-image .3s ease
+					transition width .3s ease, background-image .3s ease, box-shadow .3s ease
 					box-shadow 0px 2px 10px rgba(0, 0, 0, .3)
+
+					&:hover
+						box-shadow 0px 2px 10px rgba(0, 0, 0, .5)
 
 					&::after
 						display none
@@ -293,4 +382,27 @@ export default {
 
 					&.flying
 						width 40px
+
+		.reset-password-modal
+			& >>> .el-dialog__close
+				font-size 18px
+
+			& >>> .el-dialog__body
+				padding-top 5px
+
+			.form-item-box
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-top: 10px;
+
+				& >>> .el-form-item__content
+					flex: 1;
+
+			.btn-box
+				display flex
+				flex-direction row
+				justify-content center
+				align-items center
+				margin-top 20px
 </style>

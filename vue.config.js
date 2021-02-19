@@ -37,8 +37,6 @@ class TestPlugin {
 	}
 }
 
-console.log(process.env)
-
 module.exports = {
   publicPath: process.env.VUE_BUILD_TARGET === 'gh-pages' ? '/production-manager' : '/',
   chainWebpack: config => {
@@ -53,17 +51,17 @@ module.exports = {
       .set('@store', resolve('src/store'))
 			.set('@themes', resolve('src/themes'))
 
-		config
-			.module
-			.rule('abc')
-			.resourceQuery(/blockType=abc/)
-			.type('javascript/auto')
-			.use('abc')
-			.loader(require.resolve('./loaders/abc-loader.js'))
+		// config
+		// 	.module
+		// 	.rule('abc')
+		// 	.resourceQuery(/blockType=abc/)
+		// 	.type('javascript/auto')
+		// 	.use('abc')
+		// 	.loader(require.resolve('./loaders/abc-loader.js'))
 
-		config
-			.plugin('testPlugin')
-			.use(TestPlugin)
+		// config
+		// 	.plugin('testPlugin')
+		// 	.use(TestPlugin)
 	},
   pluginOptions: {
     electronBuilder: {

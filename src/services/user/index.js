@@ -143,3 +143,8 @@ export const cleanAllPermission = params => {
       return AV.Object.destroyAll(UserPermissionModelList)
     })
 }
+
+// 重置密码(电子邮件方式)
+export const resetPasswordByEmail = params => {
+  return AV.User.requestPasswordReset(params)
+}
