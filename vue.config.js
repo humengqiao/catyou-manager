@@ -67,8 +67,8 @@ module.exports = {
     electronBuilder: {
       builderOptions: {
         'appId': 'com.humengqiao.app',
-        'productName': '产品进销存管理系统',//项目名，也是生成的安装文件名
-        'copyright': 'Copyright © 2020',//版权信息
+        'productName': 'Cat You Manager',//项目名，也是生成的安装文件名
+        'copyright': 'Copyright © 2021',//版权信息
         'publish': [
           {
             'provider': 'generic',
@@ -91,7 +91,7 @@ module.exports = {
           }
         },
         'dmg': {
-          'title': '产品进销存管理系统',
+          'title': 'Cat You Manager',
           // 'icon': './public/favicon.ico',
           'contents': [
             {

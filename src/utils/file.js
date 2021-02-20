@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-01-12 21:20:25
- * @LastEditTime: 2020-06-01 20:55:49
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: /vue-common-tools/Users/humengqiao/Desktop/fe-project/production-manager/src/utils/file.js
- */
 import { formatDate } from './date'
 import xlsx from 'xlsx'
 

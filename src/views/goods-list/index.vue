@@ -1151,7 +1151,7 @@ export default {
 					cursor pointer
 
 		& >>> .el-dialog__body
-			padding 35px
+			padding 35px 20px
 
 			.el-upload-dragger
 				width 100%
@@ -1187,7 +1187,10 @@ export default {
 			cursor pointer
 
 	.production-out-in-coming-record-container
+		overflow-y auto
+		height 60vh
 		margin-top -20px
+		padding 0 10px
 
 		.title-container
 			display flex
@@ -1210,6 +1213,9 @@ export default {
 
 			.content
 				flex 1
+
+				&:first-line
+					padding-right 20px
 
 			.copy-btn
 				position absolute
