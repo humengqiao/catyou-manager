@@ -38,7 +38,7 @@ class TestPlugin {
 }
 
 module.exports = {
-  publicPath: process.env.VUE_BUILD_TARGET === 'gh-pages' ? '/production-manager/' : '/',
+  publicPath: process.env.VUE_APP_BUILD_TARGET === 'gh-pages' ? '/production-manager/' : '/',
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
