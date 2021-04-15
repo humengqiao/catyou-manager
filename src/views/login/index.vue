@@ -21,7 +21,7 @@
 			<h2 class="system-name">Cat You Manager</h2>
 			<img
 				class="cat-img"
-				src="/favicon.ico">
+				:src="`${publicPath}favicon.ico`">
 		</div>
 		<div class="login-container">
 			<el-form
@@ -175,7 +175,8 @@ export default {
 			bgImgList: [
 				require('@/assets/images/bg1.jpeg'),
 				require('@/assets/images/bg2.jpeg')
-			]
+			],
+			publicPath: process.env.VUE_BUILD_TARGET === 'gh-pages' ? '/production-manager' : '/'
 		}
 	},
 	computed: {

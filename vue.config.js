@@ -38,7 +38,7 @@ class TestPlugin {
 }
 
 module.exports = {
-  publicPath: process.env.VUE_BUILD_TARGET === 'gh-pages' ? '/production-manager' : '/',
+  publicPath: process.env.VUE_BUILD_TARGET === 'gh-pages' ? '/production-manager/' : '/',
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
@@ -50,6 +50,9 @@ module.exports = {
       .set('@utils', resolve('src/utils'))
       .set('@store', resolve('src/store'))
 			.set('@themes', resolve('src/themes'))
+
+		config.plugins.delete('prefetch')
+		config.plugins.delete('preload')
 
 		// config
 		// 	.module

@@ -27,7 +27,8 @@
     "postuninstall": "electron-builder install-app-deps",
     "postelectron:build-*": "node ./scripts/build-update-desc",
     "build:gh-pages": "vue-cli-service build --mode gh-pages",
-    "pack:gh-pages": "rimraf docs && npm run build:gh-pages && sync-glob dist/ docs/"
+    "pack:gh-pages": "rimraf docs && npm run build:gh-pages && sync-glob dist/ docs/",
+		"deploy:gh-pages": "bash ./scripts/deploy-gh-pages.sh"
   },
   "dependencies": {
     "axios": "^0.19.2",

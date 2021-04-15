@@ -1,3 +1,3 @@
-#!/bin/bash
+#!bin/bash
 
-yarn deploy:gh-pages
+yarn pack:gh-pages
