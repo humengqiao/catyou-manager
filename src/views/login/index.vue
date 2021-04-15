@@ -1,12 +1,28 @@
 <template>
-	<div
-		class="container"
-		:style="containerStyle">
+	<div class="container">
+		<!-- 背景图 -->
+		<transition-group
+			tag="ul"
+			name="fade">
+			<li
+				v-for="(item, index) in bgImgList"
+				v-show="index === (bgIndex - 1)"
+				:key="item"
+				class="bg-img"
+				:style="{
+					backgroundImage: `url(${item})`
+				}"></li>
+		</transition-group>
 		<!-- 特效组件 -->
 		<component
 			v-if="effectComponent"
 			:is="effectComponent"></component>
-		<h2 class="system-name">Cat You Manager</h2>
+		<div class="title-wrapper-box">
+			<h2 class="system-name">Cat You Manager</h2>
+			<img
+				class="cat-img"
+				src="/favicon.ico">
+		</div>
 		<div class="login-container">
 			<el-form
 				ref="loginFormRef"
@@ -155,18 +171,17 @@ export default {
 						}, trigger: 'blur'
 					}
 				]
-			}
+			},
+			bgImgList: [
+				require('@/assets/images/bg1.jpeg'),
+				require('@/assets/images/bg2.jpeg')
+			]
 		}
 	},
 	computed: {
 		effectComponent() {
 			const bgIndex = this.bgIndex
 			return this.$themes.loginTheme.loginBgEffectComponent[bgIndex]
-		},
-		containerStyle() {
-			return {
-				backgroundImage: `url(${require(`../../assets/images/bg${this.bgIndex}.jpeg`)})`
-			}
 		},
 		loginBtnStyle() {
 			const bgIndex = this.bgIndex
@@ -245,18 +260,39 @@ export default {
 	.container
 		overflow hidden
 		height 100%
-		background-repeat no-repeat
-		background-size cover
-		transition background-image .5s
 
-		.system-name
-			position relative
+		.bg-img
+			position fixed
+			left 0
+			top 0
+			right 0
+			bottom 0
+			background-repeat no-repeat
+			background-size cover
+			background-position center
+
+		.title-wrapper-box
+			display flex
+			flex-direction row
+			justify-content center
+			align-items center
 			margin-top 100px
 			margin-bottom 30px
-			font-size 30px
-			color #fff
-			text-align center
-			z-index 100
+
+			.system-name
+				position relative
+				margin 0
+				font-size 30px
+				color #fff
+				text-align center
+				z-index 100
+
+			.cat-img
+				position relative
+				width 60px
+				margin-left 10px
+				border-radius 6px
+				z-index 999
 
 		.login-container
 			position relative
