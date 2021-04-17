@@ -1,4 +1,3 @@
-import AV from 'leancloud-storage/live-query'
 import store from '@store'
 
 // 查询upc是否存在

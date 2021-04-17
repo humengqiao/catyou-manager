@@ -1,5 +1,3 @@
-import AV from 'leancloud-storage/live-query'
-
 // 获取fba发货列表
 export const getFbaList = params => {
 	const { currentPage, pageSize } = params

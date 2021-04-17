@@ -1,11 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import * as types from './types'
 import services from '@services'
 import { Message } from 'element-ui'
-
-Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage

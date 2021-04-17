@@ -1,6 +1,7 @@
 const path = require('path')
 const feedUrl = require('./src/config/app-update').feedUrl
 const RuleSet = require('webpack/lib/RuleSet')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const resolve = dir => {
   return path.join(__dirname, dir)
@@ -66,6 +67,32 @@ module.exports = {
 		// config
 		// 	.plugin('testPlugin')
 		// 	.use(TestPlugin)
+	},
+	configureWebpack: config => {
+		const plugins = []
+		// 利用环境变量进行判断是否是生产环境production
+		if(process.env.NODE_ENV === 'production') {
+			config.externals = {
+				'vue': 'Vue',
+				'vue-router': 'VueRouter',
+				'echarts': 'echarts',
+				'xlsx': 'XLSX',
+				'element-ui': 'ELEMENT',
+				'leancloud-storage': 'AV',
+				'vuex': 'Vuex'
+			}
+
+			plugins.push(
+				new BundleAnalyzerPlugin({
+					analyzerMode: 'static'
+				})
+			)
+		}
+		// 然后将新增externals选项合并至plugins配置中
+		config.plugins = [
+			...config.plugins,
+			...plugins
+		]
 	},
   pluginOptions: {
     electronBuilder: {

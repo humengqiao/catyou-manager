@@ -114,7 +114,6 @@
 </template>
 
 <script>
-import AV from 'leancloud-storage/live-query'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

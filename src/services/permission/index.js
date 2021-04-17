@@ -1,5 +1,3 @@
-import AV from 'leancloud-storage/live-query'
-
 // 获取所有权限列表
 export const getAllPermissionList = () => {
   const query = new AV.Query('PermissionList')

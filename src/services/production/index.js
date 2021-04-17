@@ -1,4 +1,3 @@
-import AV from 'leancloud-storage/live-query'
 import store from '@store'
 import { formatDate } from '@utils/date'
 import { highlightColor } from '@config/common'

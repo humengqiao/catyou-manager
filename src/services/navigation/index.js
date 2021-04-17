@@ -1,5 +1,3 @@
-import AV from 'leancloud-storage/live-query'
-
 // 获取导航列表
 export const getNavigationList = params => {
   const { currentPage, pageSize } = params

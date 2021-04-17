@@ -1,4 +1,3 @@
-import AV from 'leancloud-storage'
 import * as productionService from './production'
 import * as userService from './user'
 import * as upcService from './upc'

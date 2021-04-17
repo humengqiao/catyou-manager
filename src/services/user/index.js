@@ -1,6 +1,3 @@
-import AV from 'leancloud-storage/live-query'
-// eslint-disable-next-line
-import storage from 'good-storage'
 import store from '@/store'
 
 // 获取用户头像
