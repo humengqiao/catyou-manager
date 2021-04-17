@@ -126,7 +126,7 @@
 					prop="remark"></el-table-column>
 				<el-table-column
 					label="创建时间"
-					width="90">
+					width="100">
 					<template slot-scope="scope">{{ $utils.dateUtils.formatDate(new Date(scope.row.createdAt)) }}</template>
 				</el-table-column>
 			</el-table>
