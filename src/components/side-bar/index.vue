@@ -74,5 +74,10 @@ export default {
 				width 29px
 
 			.nav-text
-				vertical-align sub
+				vertical-align middle
+
+			& >>> .el-menu-item,
+			& >>> .el-submenu__title
+				height 45px
+				line-height 45px
 </style>

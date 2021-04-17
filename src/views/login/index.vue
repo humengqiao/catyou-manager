@@ -22,7 +22,7 @@
 				<h2 class="system-name">Cat You Manager</h2>
 				<img
 					class="cat-img"
-					:src="`${publicPath}favicon.ico`">
+					src="@/assets/images/logo.png">
 			</div>
 		</div>
 		<div class="login-container">
@@ -182,8 +182,7 @@ export default {
 			bgImgList: [
 				require('@/assets/images/bg1.jpeg'),
 				require('@/assets/images/bg2.jpeg')
-			],
-			publicPath: process.env.VUE_APP_BUILD_TARGET === 'gh-pages' ? '/catyou-manager/' : '/'
+			]
 		}
 	},
 	computed: {

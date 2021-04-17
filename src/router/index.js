@@ -120,7 +120,17 @@ router.beforeEach((to, from, next) => {
     })
   }
 
-  if(excludeRoutePath.findIndex(item => item === to.path) !== -1) return next()
+  if(excludeRoutePath.findIndex(item => item === to.path) !== -1) {
+		if(to.path === '/dashboard') {
+			const firstPath = permissionList[0].path
+
+			return next({
+				path: firstPath
+			})
+		}
+
+		return next()
+	}
 
   // 检查用户权限
   if(

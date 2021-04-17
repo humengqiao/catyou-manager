@@ -1,6 +1,7 @@
 <template>
 	<div class="app-container">
 		<div class="sider-container">
+			<brand-logo></brand-logo>
 			<user-info></user-info>
 			<side-bar class="sider-bar-container"></side-bar>
 		</div>
@@ -14,12 +15,14 @@
 import { mapActions } from 'vuex'
 import UserInfo from '@components/user-info'
 import SideBar from '@components/side-bar'
+import BrandLogo from '@components/brand-logo'
 
 export default {
 	name: 'Dashboard',
 	components: {
 		SideBar,
-		UserInfo
+		UserInfo,
+		BrandLogo
 	},
 	mounted() {
 		this.fetchUserPermissionList()
@@ -43,12 +46,13 @@ export default {
 
 			.sider-bar-container
 				flex 1
+				height 0
 
 				& >>> .el-menu-vertical-container
+					overflow-y auto
 					height 100%
 
 				& >>> .el-menu-item [class^="el-icon"]
-					margin-top 5px
 					font-size 18px !important
 
 		.router-content-container
