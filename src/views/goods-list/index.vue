@@ -269,6 +269,7 @@
 					<el-input
 						v-model="form.remark"
 						type="textarea"
+						rows="6"
 						placeholder="请输入产品备注"></el-input>
 				</el-form-item>
 			</el-form>
@@ -971,7 +972,8 @@ export default {
 			const { desc } = this.productionDetail
 			if(!desc) return this.$message.warning('无拷贝内容')
 
-			const copyStr = desc.replace(/<br\s*\/?>/g, '\r\n')
+			const copyStr = desc.replace(/<br\s*\/?>/g, '\n')
+
 			this.$utils.commonUtils.copy(copyStr)
 			this.$message.success('拷贝成功')
 		},
@@ -1150,7 +1152,7 @@ export default {
 					cursor pointer
 
 		& >>> .el-dialog__body
-			padding 35px 20px
+			padding 35px
 
 			.el-upload-dragger
 				width 100%
@@ -1236,6 +1238,10 @@ export default {
 			top 50%
 			left 50%
 			transform translate3d(-50%, -50%, 0)
+
+		& >>> .el-dialog__body
+			overflow-y auto
+			max-height 500px
 
 	.production-out-in-coming-graph-container
 		.panel-container

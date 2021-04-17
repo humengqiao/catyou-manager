@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 if(!isDevelopment) installVueDevtools(true)
 
 // 清空之前下载的更新包，保证有版本更新时每次都会有更新提示
-// const updaterCacheDirName = 'production-manager-updater'
+// const updaterCacheDirName = 'catyou-manager-updater'
 // const updatePendingPath = path.join(autoUpdater.app.baseCachePath, updaterCacheDirName, 'pending')
 // fs.emptyDirSync(updatePendingPath)
 

@@ -1,13 +1,13 @@
 version: "3.5"
 
 services:
-  production-manager:
-    image: humengqiao/production-manager:2020-02-6
+  catyou-manager:
+    image: humengqiao/catyou-manager:2020-02-6
     ports:
       - "127.0.0.1:8888:80"
     volumes:
       - type: volume
-        source: production-manager-volume
+        source: catyou-manager-volume
         target: /tmp
         volume:
           nocopy: true
@@ -29,5 +29,5 @@ services:
           cpus: "0.2"
           memory: 50M
 volumes:
-  production-manager-volume:
+  catyou-manager-volume:
     external: true

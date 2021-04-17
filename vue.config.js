@@ -39,7 +39,7 @@ class TestPlugin {
 }
 
 module.exports = {
-  publicPath: process.env.VUE_APP_BUILD_TARGET === 'gh-pages' ? '/production-manager/' : '/',
+  publicPath: process.env.VUE_APP_BUILD_TARGET === 'gh-pages' ? '/catyou-manager/' : '/',
 	outputDir: process.env.VUE_APP_OUT_DIR ? process.env.VUE_APP_OUT_DIR : 'dist',
   chainWebpack: config => {
     config.resolve.alias
@@ -84,7 +84,7 @@ module.exports = {
 
 			plugins.push(
 				new BundleAnalyzerPlugin({
-					analyzerMode: 'static'
+					analyzerMode: 'disabled'
 				})
 			)
 		}
@@ -104,7 +104,7 @@ module.exports = {
           {
             'provider': 'generic',
             'url': feedUrl,
-            'updaterCacheDirName': 'production-manager-updater'
+            'updaterCacheDirName': 'catyou-manager-updater'
           }
         ],
         'mac': { // mac相关配置
@@ -113,9 +113,9 @@ module.exports = {
           'extendInfo': {
             'URL types': [
               {
-                'URL identifier': 'production-manager',
+                'URL identifier': 'catyou-manager',
                 'URL Schemes': [
-                  'production-manager'
+                  'catyou-manager'
                 ]
               }
             ]

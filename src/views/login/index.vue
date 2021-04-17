@@ -183,7 +183,7 @@ export default {
 				require('@/assets/images/bg1.jpeg'),
 				require('@/assets/images/bg2.jpeg')
 			],
-			publicPath: process.env.VUE_APP_BUILD_TARGET === 'gh-pages' ? '/production-manager/' : '/'
+			publicPath: process.env.VUE_APP_BUILD_TARGET === 'gh-pages' ? '/catyou-manager/' : '/'
 		}
 	},
 	computed: {

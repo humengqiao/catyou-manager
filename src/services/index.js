@@ -23,7 +23,7 @@ const init = () => {
   AV.init({
     ...(
       env.isDev ?
-      leanCloudConfig.leancloudDev :
+      leanCloudConfig.leancloudProd :
       env.isProd ?
       leanCloudConfig.leancloudProd :
       {}
