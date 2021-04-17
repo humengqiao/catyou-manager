@@ -33,7 +33,9 @@ export const loginBtnLinearGradientCssHoudiniPropertyList = [
 ]
 
 // 登录页按钮过渡效果
-export const loginBtnLinearGradient = {
-  1: 'linear-gradient(to left, var(--loginBtn-start) 60%, var(--loginBtn-end) 100%)',
-  2: 'linear-gradient(to left, var(--loginBtn-start) 30%, var(--loginBtn-end) 100%)'
+export const loginBtnLinearGradient = direction => {
+	return {
+		1: `linear-gradient(to ${direction}, var(--loginBtn-start) 60%, var(--loginBtn-end) 100%)`,
+		2: `linear-gradient(to ${direction}, var(--loginBtn-start) 30%, var(--loginBtn-end) 100%)`
+	}
 }

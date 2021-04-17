@@ -193,10 +193,16 @@ export default {
 		},
 		loginBtnStyle() {
 			const bgIndex = this.bgIndex
+			const loginBtnLinearGradient = this.$themes.loginTheme.loginBtnLinearGradient
+			const randomDirection = [
+				'left',
+				'right'
+			][this.$utils.commonUtils.tweenRandom(0, 1)]
+
 			this.registerLoginBtnCssHoudiniProperty()
 
 			return {
-				backgroundImage: this.$themes.loginTheme.loginBtnLinearGradient[bgIndex]
+				backgroundImage: loginBtnLinearGradient(randomDirection)[bgIndex]
 			}
 		}
 	},
