@@ -121,7 +121,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if(excludeRoutePath.findIndex(item => item === to.path) !== -1) {
-		if(to.path === '/dashboard') {
+		if(to.path === '/dashboard' && permissionList.length > 0) {
 			const firstPath = permissionList[0].path
 
 			return next({
