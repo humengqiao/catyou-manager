@@ -371,7 +371,6 @@ export default {
 							position absolute
 							left 50%
 							top 0
-							bottom 0
 							width 1px
 							height 20px
 							background #000

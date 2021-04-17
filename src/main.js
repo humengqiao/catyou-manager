@@ -11,6 +11,7 @@ import store from '@store'
 import utils from '@utils'
 import themes from '@themes'
 import mourning_2020404 from '@/activitys/2020-04-04-mourning'
+import './logo-printer'
 
 Vue.use(element)
 Vue.use(directives)
