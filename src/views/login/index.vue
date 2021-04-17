@@ -18,10 +18,12 @@
 			v-if="effectComponent"
 			:is="effectComponent"></component>
 		<div class="title-wrapper-box">
-			<h2 class="system-name">Cat You Manager</h2>
-			<img
-				class="cat-img"
-				:src="`${publicPath}favicon.ico`">
+			<div class="title-box">
+				<h2 class="system-name">Cat You Manager</h2>
+				<img
+					class="cat-img"
+					:src="`${publicPath}favicon.ico`">
+			</div>
 		</div>
 		<div class="login-container">
 			<el-form
@@ -33,13 +35,15 @@
 					class="input-item-container"
 					label="用户名："
 					prop="username">
-					<el-input
-						:class="['input', `login-input-hover-${bgIndex}`, {
-							shaking: isUsernameError
-						}]"
-						v-model="form.username"
-						placeholder="请输入用户名"
-						@animationend.native="isUsernameError = false"></el-input>
+					<div class="username-input-container">
+						<el-input
+							:class="['input', `login-input-hover-${bgIndex}`, {
+								shaking: isUsernameError
+							}]"
+							v-model="form.username"
+							placeholder="请输入用户名"
+							@animationend.native="isUsernameError = false"></el-input>
+					</div>
 				</el-form-item>
 				<el-form-item
 					class="input-item-container password"
@@ -57,7 +61,9 @@
 							@keyup.native.enter="onHandleClickLogin">
 						</el-input>
 						<i
-							class="el-icon-view eye-btn"
+							:class="['el-icon-view eye-btn', {
+								hide: ifViewPassword
+							}]"
 							@click="ifViewPassword = !ifViewPassword"></i>
 					</div>
 				</el-form-item>
@@ -69,13 +75,14 @@
 				<div class="login-btn-container">
 					<div
 						:class="['login-btn', {
-							flying: loginLoading,
-							circling: isCircling
+							'loading': loginLoading
 						}]"
 						:style="loginBtnStyle"
-						@click="onHandleClickLogin"
-						@transitionend="onHandleTransitionEndLoginBtn">
+						@click="onHandleClickLogin">
 						<span class="login-text">登 录</span>
+						<i
+							v-show="loginLoading"
+							class="el-icon-loading icon-loading"></i>
 					</div>
 				</div>
 			</el-form>
@@ -85,7 +92,8 @@
 			class="reset-password-modal"
 			title="重置密码"
 			width="35%"
-			:visible.sync="isShowResetPasswordModal">
+			:visible.sync="isShowResetPasswordModal"
+			@close="$refs.resetPasswordFormRef.resetFields()">
 			<el-alert
 				title="输入电子邮箱地址收到邮件后去邮件里的链接网站完成重置操作"
 				type="warning"></el-alert>
@@ -127,7 +135,6 @@ export default {
 	data() {
 		return {
 			loginLoading: false,
-			isCircling: false,
 			isUsernameError: false,
 			isPasswordError: false,
 			ifViewPassword: false,
@@ -186,15 +193,10 @@ export default {
 		},
 		loginBtnStyle() {
 			const bgIndex = this.bgIndex
+			this.registerLoginBtnCssHoudiniProperty()
+
 			return {
 				backgroundImage: this.$themes.loginTheme.loginBtnLinearGradient[bgIndex]
-			}
-		}
-	},
-	watch: {
-		loginLoading(newVal) {
-			if(!newVal) {
-				this.isCircling = false
 			}
 		}
 	},
@@ -207,6 +209,35 @@ export default {
 		this.timer && clearInterval(this.timer)
 	},
 	methods: {
+		registerLoginBtnCssHoudiniProperty() {
+			const loginBtnLinearGradientCssHoudiniPropertyList = this.$themes.loginTheme.loginBtnLinearGradientCssHoudiniPropertyList
+			let loginBtnStyleEl = document.querySelector('#login-btn-houdini')
+			const bgIndex = this.bgIndex
+
+			if(!loginBtnStyleEl) {
+				loginBtnStyleEl = document.createElement('style')
+				loginBtnStyleEl.id = 'login-btn-houdini'
+				document.head.appendChild(loginBtnStyleEl)
+			}
+
+			const cssText = loginBtnLinearGradientCssHoudiniPropertyList
+				.filter(({ key }) => (key === `loginBtn-${bgIndex}-start`) || (key === `loginBtn-${bgIndex}-end`))
+				.map(item => {
+					const suffixKey = item.key.indexOf('start') > -1 ? 'start' : 'end'
+
+					return `
+						@property --loginBtn-${suffixKey} {
+							syntax: '${item.syntax}';
+							inherits: ${item.inherits};
+							initial-value: ${item['initial-value']};
+						}
+					`
+				})
+				.join('')
+				.replace(/\t/g, '')
+
+			loginBtnStyleEl.innerHTML = cssText
+		},
 		async onHandleClickLogin() {
 			const form = this.form
 			if(!form.username || !form.password) {
@@ -230,12 +261,6 @@ export default {
 				this.loginLoading = false
 				if(this.isUsernameError || this.isPasswordError || !error) return
 				this.$message.error(error)
-			}
-		},
-		onHandleTransitionEndLoginBtn() {
-			const loginLoading = this.loginLoading
-			if(loginLoading) {
-				this.isCircling = true
 			}
 		},
 		onHandleClickSubmitResetPasswordForm() {
@@ -277,23 +302,29 @@ export default {
 			flex-direction row
 			justify-content center
 			align-items center
-			margin-top 100px
-			margin-bottom 30px
+			margin-top 150px
+			margin-bottom 25px
 
-			.system-name
+			.title-box
 				position relative
-				margin 0
-				font-size 30px
-				color #fff
-				text-align center
-				z-index 100
+				width 600px
 
-			.cat-img
-				position relative
-				width 60px
-				margin-left 10px
-				border-radius 6px
-				z-index 999
+				.system-name
+					position relative
+					margin 0
+					font-size 30px
+					color #fff
+					text-align center
+					z-index 100
+
+				.cat-img
+					position absolute
+					top 50%
+					right 110px
+					width 60px
+					border-radius 6px
+					transform translateY(-50%)
+					z-index 999
 
 		.login-container
 			position relative
@@ -308,6 +339,7 @@ export default {
 
 			& >>> .el-form-item__label
 				white-space nowrap
+				line-height 35px
 
 			.input-item-container
 				& >>> .el-form-item__label
@@ -319,19 +351,34 @@ export default {
 				&.password
 					margin-bottom 0
 
-				.password-input-container
+				.password-input-container,
+				.username-input-container
 					position relative
+					margin-right 44px
 
+				.password-input-container
 					.eye-btn
 						position absolute
-						right 60px
+						right 15px
 						top 50%
 						font-size 20px
 						transform translateY(-50%)
 						cursor pointer
 
+						&.hide:after
+							content ''
+							display block
+							position absolute
+							left 50%
+							top 0
+							bottom 0
+							width 1px
+							height 20px
+							background #000
+							transform translateX(-50%) rotate(-45deg)
+
 				.input
-					width 90%
+					width 100%
 
 					@keyframes shaking
 						0%
@@ -354,6 +401,7 @@ export default {
 				color #fff
 
 				.reset-password-btn
+					margin-top 5px
 					cursor pointer
 
 					&:hover
@@ -363,62 +411,38 @@ export default {
 				display flex
 				flex-direction row
 				justify-content center
-				width 414px
-				margin-left 80px
+				margin-left 100px
+				margin-right 44px
 
 				.login-btn
 					position relative
 					width 100%
 					height 40px
 					line-height 40px
-					margin 40px 0
+					margin 25px 0
 					margin-bottom 0
-					border-radius 20px
+					border-radius 8px
 					color #fff
 					text-align center
 					cursor pointer
-					transition width .3s ease, background-image .3s ease, box-shadow .3s ease
+					transition width .3s ease, box-shadow .3s ease, --loginBtn-start 3s, --loginBtn-end 3s
 					box-shadow 0px 2px 10px rgba(0, 0, 0, .3)
 
 					&:hover
 						box-shadow 0px 2px 10px rgba(0, 0, 0, .5)
 
-					&::after
-						display none
-						content ''
-						position absolute
-						left 0
-						top 0
-						right 0
-						bottom 0
-						border-radius 50%
-						background-image inherit
-
-					&.circling
-						&::after
-							display block
-							animation-name scaling
-							animation-duration 2s
-							animation-timing-function linear
-							animation-iteration-count infinite
+					&.loading
+						opacity .5
+						cursor not-allowed
 
 					.login-text
 						position relative
 						font-size 16px
 						z-index 10
 
-					@keyframes scaling
-						0%
-							transform scale(1)
-
-						50%
-							transform scale(1.3)
-
-						100%
-							transform scale(1)
-
-					&.flying
-						width 40px
+					.icon-loading
+						margin-left 5px
+						font-size 16px
 
 		.reset-password-modal
 			& >>> .el-dialog__close
@@ -441,5 +465,5 @@ export default {
 				flex-direction row
 				justify-content center
 				align-items center
-				margin-top 20px
+				margin-top 30px
 </style>
