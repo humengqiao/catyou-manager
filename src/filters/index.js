@@ -13,7 +13,5 @@ export const filterLink = url => {
   return url
 }
 
-export default Vue => {
-  Vue.filter('filterProductionUnit', filterProductionUnit)
-  Vue.filter('filterLink', filterLink)
-}
+Vue.filter('filterProductionUnit', filterProductionUnit)
+Vue.filter('filterLink', filterLink)

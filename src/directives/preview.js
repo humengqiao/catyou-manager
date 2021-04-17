@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { Message } from 'element-ui'
 import Preview from '@components/preview'
 
@@ -45,13 +44,11 @@ const handleClick = function(binding) {
   }
 }
 
-export default Vue => {
-  Vue.directive('preview', {
-    bind(el, binding) {
-      el.addEventListener('click', handleClick.call(el, binding), false)
-    },
-    unbind(el) {
-      el.removeEventListener('click', handleClick)
-    }
-  })
-}
+Vue.directive('preview', {
+	bind(el, binding) {
+		el.addEventListener('click', handleClick.call(el, binding), false)
+	},
+	unbind(el) {
+		el.removeEventListener('click', handleClick)
+	}
+})

@@ -1,5 +1,5 @@
 <template>
-	<transition name="fade" appear>
+	<transition name="img-fade" appear>
 		<div
 			v-if="visible"
 			:data-preview-id="id"
