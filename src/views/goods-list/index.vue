@@ -326,6 +326,7 @@
 		<!-- 查看产品进销 -->
 		<el-dialog
 			:visible.sync="productionOutInComingRecordModal"
+			destroy-on-close
 			title="产品进销记录">
 			<div
 				v-loading="productionOutInComingRecordLoading"
@@ -673,7 +674,6 @@ export default {
 		})
 	},
 	mounted() {
-		debugger
 		this.fetchProductionList()
 	},
 	methods: {
@@ -693,7 +693,6 @@ export default {
 				this.list = [...list]
 				this.pagination = { ...pagination }
 			}catch(error) {
-				console.log(error)
 				this.$message.error(error)
 			}finally {
 				this.productionLoading = false
@@ -902,10 +901,10 @@ export default {
 			}
 		},
 		renderProductionOutInComingGraph({ dateList, totalList, outList, inList }) {
-			console.log(totalList)
 			this.chart && this.chart.clear()
 			this.chart && this.chart.dispose()
-			const chart = this.$echarts.init(this.$refs.productionOutInComingGraphRef)
+
+			const chart = echarts.init(this.$refs.productionOutInComingGraphRef)
 
 			chart.setOption({
 				title: {
@@ -1213,6 +1212,7 @@ export default {
 
 			.content
 				flex 1
+				padding-right 20px
 
 				&:first-line
 					padding-right 20px

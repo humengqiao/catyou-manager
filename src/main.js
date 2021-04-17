@@ -18,7 +18,6 @@ services.init()
 mourning_2020404.bootstrap()
 
 Vue.config.productionTip = false
-Vue.config.$echarts = echarts
 
 new Vue({
   router,

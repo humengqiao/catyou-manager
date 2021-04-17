@@ -1,5 +1,4 @@
 import { formatDate } from './date'
-import xlsx from 'xlsx'
 
 export const downloadExcel = (htmlStr, filename = formatDate(new Date(), 'yyyy-MM-dd') + '.xls') => {
   const blob = new Blob([htmlStr], {type: 'application/vnd.ms-excel'})
@@ -50,7 +49,7 @@ export const importExcel = async (cb = () => {}) => {
     reader.onload = event => {
       try {
         const data = event.target.result
-        const workbook = xlsx.read(data, {
+        const workbook = XLSX.read(data, {
           type: 'binary'
 				})
 
@@ -60,7 +59,7 @@ export const importExcel = async (cb = () => {}) => {
         // 遍历每张表读取
         for(let sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
-            json.push(...xlsx.utils.sheet_to_json(workbook.Sheets[sheet]))
+            json.push(...XLSX.utils.sheet_to_json(workbook.Sheets[sheet]))
             break // 如果只取第一张表，就取消注释这行
           }
         }

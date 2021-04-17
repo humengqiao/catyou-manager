@@ -12,7 +12,17 @@ export const getProductionList = (params = {
 }, queryAll = false) => {
   const query = new AV.Query('Production')
   const queryCount = new AV.Query('Production')
-	const { pagination: { pageSize, currentPage }, keyword } = params
+	let pageSize, currentPage, keyword
+
+	if(params) {
+		if(params.pagination) {
+			pageSize = params.pagination.pageSize
+			currentPage = params.pagination.currentPage
+		}
+
+		keyword = params.keyword || ''
+	}
+
   const { username } = (store.__esModule ? store.default : store).state.global.user
 
   query.include('productionImg')
