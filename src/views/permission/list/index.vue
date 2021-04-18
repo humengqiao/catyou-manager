@@ -161,6 +161,7 @@ export default {
 		display flex
 		flex-direction column
 		flex 1
+		height 0
 		margin-bottom 30px
 
 		.table-container

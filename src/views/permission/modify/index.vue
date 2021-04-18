@@ -66,13 +66,14 @@ export default {
 			try {
 				const result = await this.$service.permissionService.getAllPermissionList()
 				if(result) {
-					this.list = result.map(({ path, name, objectId, disabled, icon, show }) => ({
+					this.list = result.map(({ path, name, objectId, disabled, icon, show, remark }) => ({
 						key: objectId,
 						label: name,
 						value: path,
 						navigationDisabled: disabled,
 						icon,
-						show
+						show,
+						remark
 					}))
 				}
 			}catch(error) {
@@ -103,14 +104,15 @@ export default {
 				const index = list.findIndex(({ key }) => key === item)
 
 				if(index !== -1) {
-					const { value: path, icon, label: name, show, navigationDisabled } = list[index]
+					const { value: path, icon, label: name, show, navigationDisabled, remark } = list[index]
 					return {
 						path,
 						icon,
 						name,
 						show,
 						navigationDisabled,
-						sort: sortIndex++
+						sort: sortIndex++,
+						remark
 					}
 				}
 			}).filter(item => !!item)

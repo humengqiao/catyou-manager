@@ -45,8 +45,9 @@ export const updateUserPermission = params => {
       // 计算出删除的权限
       const deletePermission = result.filter(item => list.findIndex(_item => (_item.sort === item.sort) && (_item.path === item.path)) === -1)
 
-      const modifyPremissionModelList = modifyPermission.map(({ path, name, icon, show, navigationDisabled, sort }) => {
+      const modifyPremissionModelList = modifyPermission.map(({ path, name, icon, show, navigationDisabled, sort, remark }) => {
         const model = new AV.Object('UserPermission')
+
         model.set('path', path)
         model.set('name', name)
         model.set('icon', icon)
@@ -54,6 +55,7 @@ export const updateUserPermission = params => {
         model.set('username', username)
 				model.set('disabled', navigationDisabled)
 				model.set('sort', sort)
+				model.set('remark', remark)
 
         return model.save()
 			})

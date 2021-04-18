@@ -237,8 +237,8 @@ export default {
 
 			.avatar-container
 				position relative
-				width 50px
-				height 50px
+				width 60px
+				height 60px
 
 				.avatar-badge
 					height 100%
@@ -247,7 +247,8 @@ export default {
 						line-height 15px
 
 					& >>> .el-badge__content.is-fixed
-						right 5px
+						top 5px
+						right 15px
 
 			.info-container
 				margin-top 10px

@@ -13,13 +13,28 @@
 				:disabled="item.disabled"
 				v-for="item in permissionList.filter(item => item.show)">
 				<template slot="title">
-					<i
-						v-if="item.icon"
-						:class="[item.icon]"></i>
-					<span
-						v-else
-						class="pad"></span>
-					<span class="nav-text">{{ item.name }}</span>
+					<template v-if="item.disabled && item.remark">
+						<i
+							v-if="item.icon"
+							:class="[item.icon]"></i>
+						<span
+							v-else
+							class="pad"></span>
+						<el-tooltip
+							:content="item.remark"
+							placement="right">
+							<span class="nav-text">{{ item.name }}</span>
+						</el-tooltip>
+					</template>
+					<template v-else>
+						<i
+							v-if="item.icon"
+							:class="[item.icon]"></i>
+						<span
+							v-else
+							class="pad"></span>
+						<span class="nav-text">{{ item.name }}</span>
+					</template>
 				</template>
 			</el-menu-item>
 		</el-menu>

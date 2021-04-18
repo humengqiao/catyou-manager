@@ -24,7 +24,7 @@
 						<i
 							v-if="breadList.length === 1"
 							:key="item.path"
-							class="el-icon-arrow-right"></i>	
+							class="el-icon-arrow-right"></i>
 					</el-breadcrumb-item>
 				</template>
 			</transition-group>

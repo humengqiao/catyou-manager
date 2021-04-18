@@ -388,6 +388,7 @@ export default {
 			display flex
 			flex-direction column
 			flex 1
+			height 0
 
 			.table-container
 				flex 1

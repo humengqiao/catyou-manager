@@ -81,6 +81,7 @@ export const editNavigation = params => {
             item.set('show', show)
             item.set('icon', icon)
             item.set('disabled', disabled)
+						item.set('remark', remark)
 
             return item
           })
