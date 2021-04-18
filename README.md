@@ -14,30 +14,4 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/humengqiao/catyou-manager?style=social)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/humengqiao/catyou-manager)
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Cat You Manager is a production-based system released by Cat You Manager Brand.
