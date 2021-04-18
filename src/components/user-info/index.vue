@@ -255,8 +255,9 @@ export default {
 				.logout
 					margin-left 5px
 					font-size 16px
-					vertical-align bottom
+					vertical-align text-top
 					cursor pointer
+
 		.user-info-modal
 			& >>> .el-drawer__header
 				[role="heading"],
