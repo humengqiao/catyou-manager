@@ -131,7 +131,7 @@ export default {
 				position: absolute;
 				left: 50%;
 				top: 50%;
-				width: 40%;
+				width: 50%;
 				height: 100%;
 				transform: translate3d(-50%, -50%, 0);
 			`
@@ -165,7 +165,7 @@ export default {
 					position relative
 					display flex
 					flex-direction column
-					width 50%
+					width 50% !important
 					height 100%
 					margin 0 auto
 
