@@ -267,6 +267,7 @@ export default {
 				this.loginLoading = true
 				const result = await this.login(form)
 				if(result && this.$service.userService.checkServerUserData(result)) {
+					await this.fetchUserPermissionList()
 					return this.$router.push('/')
 				}else {
 					this.$message.error('登录信息不合法')
@@ -291,7 +292,7 @@ export default {
 				}
 			})
 		},
-		...mapActions(['login'])
+		...mapActions(['login', 'fetchUserPermissionList'])
 	}
 }
 </script>

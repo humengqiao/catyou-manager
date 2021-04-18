@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<h3>401</h3>
+		<h3>404</h3>
 		<div>页面未找到</div>
 	</div>
 </template>
@@ -18,7 +18,7 @@ export default {
 		justify-content center
 		align-items center
 		height 100%
-		
+
 		& > *
 			font-size 18px
 </style>

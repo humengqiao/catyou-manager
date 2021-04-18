@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import UserInfo from '@components/user-info'
 import SideBar from '@components/side-bar'
 import BrandLogo from '@components/brand-logo'
@@ -23,13 +22,7 @@ export default {
 		SideBar,
 		UserInfo,
 		BrandLogo
-	},
-	mounted() {
-		this.fetchUserPermissionList()
-	},
-	methods: {
-		...mapActions(['fetchUserPermissionList'])
-	},
+	}
 }
 </script>
 

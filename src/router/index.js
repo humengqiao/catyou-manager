@@ -3,7 +3,7 @@ import store from '@/store'
 const excludeRoutePath = [
   '/login',
   '/dashboard/no-authority',
-  '/dashboard'
+	'/error/404'
 ]
 
 const isDynamicRoute = (permissionList, to) => {
@@ -120,25 +120,34 @@ router.beforeEach((to, from, next) => {
     })
   }
 
-  if(excludeRoutePath.findIndex(item => item === to.path) !== -1) {
-		if(to.path === '/dashboard' && permissionList.length > 0) {
-			const firstPath = permissionList[0].path
-
-			return next({
-				path: firstPath
-			})
-		}
-
+	if(excludeRoutePath.findIndex(item => item === to.path) !== -1) {
 		return next()
+	}
+
+	const filterdPermissionList = permissionList.filter(({ disabled }) => !disabled)
+
+	if(filterdPermissionList.length === 0) {
+		return next({
+			path: '/error/404'
+		})
 	}
 
   // 检查用户权限
   if(
     permissionList &&
     permissionList.length > 0 &&
-    (permissionList.findIndex(item => item.path === to.path) !== -1 || isDynamicRoute(permissionList, to))
+    (permissionList.findIndex(item => item.path === to.path) !== -1 || isDynamicRoute(permissionList, to) || to.path === '/dashboard')
   ) {
-    next()
+		if(permissionList.findIndex(({ path, disabled }) => (path === to.path) && disabled) !== -1) {
+			const firstPath = filterdPermissionList[0].path
+
+			next({
+				replace: true,
+				path: firstPath
+			})
+		}else {
+			next()
+		}
   }else {
     if(getRouterFullPath(routerConfig).findIndex(item => item === to.path ||
       item.replace(/(:([^\\/]+))/g, () => {

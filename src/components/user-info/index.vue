@@ -101,7 +101,9 @@
 							style="width: 220px;"
 							placeholder="请输入密码"></el-input>
 						<i
-							class="el-icon-view password-btn"
+							:class="['el-icon-view password-btn', {
+								hide: passwordVisble
+							}]"
 							@click="passwordVisble = !passwordVisble"></i>
 					</div>
 					<span
@@ -285,6 +287,17 @@ export default {
 						transform translateY(-50%)
 						cursor pointer
 						font-size 18px
+
+						&.hide:after
+							content ''
+							display block
+							position absolute
+							left 50%
+							top 0
+							width 1px
+							height 20px
+							background #000
+							transform translateX(-50%) rotate(-45deg)
 
 					.password-input
 						& >>> .el-input__inner
