@@ -165,11 +165,12 @@ export default {
 					position relative
 					display flex
 					flex-direction column
-					width 40%
+					width 50%
 					height 100%
 					margin 0 auto
 
 					.preview-inner-container
+						overflow hidden
 						display flex
 						justify-content center
 						align-items center
