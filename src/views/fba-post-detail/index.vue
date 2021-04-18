@@ -432,6 +432,8 @@ export default {
 
 	.add-or-edit-fba-modal
 		& >>> .el-dialog__body
+			overflow-y auto
+			max-height 500px
 			padding 35px
 
 		& >>> .el-icon-close
