@@ -197,11 +197,20 @@ export default {
 				'left',
 				'right'
 			][this.$utils.commonUtils.tweenRandom(0, 1)]
+			let startThreshold = this.$utils.commonUtils.tweenRandom(0, 100)
+			let endThreshold = this.$utils.commonUtils.tweenRandom(0, 100)
+			const sortedThresholdList = [
+				startThreshold,
+				endThreshold
+			].sort((a, b) => a - b)
+
+			startThreshold = sortedThresholdList[0] + '%'
+			endThreshold = sortedThresholdList[1] + '%'
 
 			this.registerLoginBtnCssHoudiniProperty()
 
 			return {
-				backgroundImage: loginBtnLinearGradient(randomDirection)[bgIndex]
+				backgroundImage: loginBtnLinearGradient(randomDirection, startThreshold, endThreshold)[bgIndex]
 			}
 		}
 	},
