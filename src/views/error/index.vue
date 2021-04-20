@@ -1,13 +1,27 @@
 <template>
 	<div class="container">
-		<h3>404</h3>
-		<div>页面未找到</div>
+		<h3>{{ $route.query.code }}</h3>
+		<div>{{ formatCode($route.query.code) }}</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'Error'
+	name: 'Error',
+	data() {
+		return {
+			codeDesc: {
+				401: '未授权',
+				404: '页面未找到'
+			}
+		}
+	},
+	methods: {
+		formatCode(code) {
+			const codeDesc = this.codeDesc
+			return codeDesc[code]
+		}
+	}
 }
 </script>
 

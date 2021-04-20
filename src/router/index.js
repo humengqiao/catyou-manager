@@ -128,7 +128,7 @@ router.beforeEach((to, from, next) => {
 
 	if(filterdPermissionList.length === 0) {
 		return next({
-			path: '/error/404'
+			path: '/error/401'
 		})
 	}
 
