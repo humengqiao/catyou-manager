@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
-		<h3>{{ $route.query.code }}</h3>
-		<div>{{ formatCode($route.query.code) }}</div>
+		<h3>{{ code }}</h3>
+		<div>{{ formatCode(code) }}</div>
 	</div>
 </template>
 
@@ -14,6 +14,17 @@ export default {
 				401: '未授权',
 				404: '页面未找到'
 			}
+		}
+	},
+	computed: {
+		code() {
+			const result = this.$route.path.match(/\/error\/(.+)/)
+
+			if(result) {
+				return result[1]
+			}
+
+			return ''
 		}
 	},
 	methods: {

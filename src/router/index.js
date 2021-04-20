@@ -3,7 +3,7 @@ import store from '@/store'
 const excludeRoutePath = [
   '/login',
   '/dashboard/no-authority',
-	'/error/404'
+	new RegExp('\\/error\\/.+')
 ]
 
 const isDynamicRoute = (permissionList, to) => {
@@ -120,7 +120,15 @@ router.beforeEach((to, from, next) => {
     })
   }
 
-	if(excludeRoutePath.findIndex(item => item === to.path) !== -1) {
+	if(excludeRoutePath.findIndex(item => {
+		if(typeof item === 'string') {
+			return item === to.path
+		}
+
+		if(item instanceof RegExp) {
+			return item.test(to.path)
+		}
+	}) !== -1) {
 		return next()
 	}
 
