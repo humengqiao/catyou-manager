@@ -146,7 +146,7 @@ router.beforeEach((to, from, next) => {
     permissionList.length > 0 &&
     (permissionList.findIndex(item => item.path === to.path) !== -1 || isDynamicRoute(permissionList, to) || to.path === '/dashboard')
   ) {
-		if(permissionList.findIndex(({ path, disabled }) => (path === to.path) && disabled) !== -1) {
+		if(permissionList.findIndex(({ path, disabled }) => (path === to.path) && disabled) !== -1 || to.path === '/dashboard') {
 			const firstPath = filterdPermissionList[0].path
 
 			next({
