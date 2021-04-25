@@ -108,7 +108,7 @@ module.exports = {
           }
         ],
         'mac': { // mac相关配置
-          // 'icon': './public/favicon.ico',//图标，当前图标在根目录下，注意这里有两个坑
+          'icon': './public/favicon.ico',//图标，当前图标在根目录下，注意这里有两个坑
           'target': ['dmg', 'zip'],
           'extendInfo': {
             'URL types': [
@@ -123,7 +123,7 @@ module.exports = {
         },
         'dmg': {
           'title': 'Cat You Manager',
-          // 'icon': './public/favicon.ico',
+          'icon': './public/favicon.ico',
           'contents': [
             {
               'x': 110,

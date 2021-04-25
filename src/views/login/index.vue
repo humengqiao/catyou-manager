@@ -19,7 +19,9 @@
 			:is="effectComponent"></component>
 		<div class="title-wrapper-box">
 			<div class="title-box">
-				<h2 class="system-name">Cat You Manager</h2>
+				<h2
+					class="system-name"
+					:style="loginBtnStyle">Cat You Manager</h2>
 				<img
 					class="cat-img"
 					src="@/assets/images/logo.png">
@@ -138,7 +140,7 @@ export default {
 			isUsernameError: false,
 			isPasswordError: false,
 			ifViewPassword: false,
-			bgIndex: this.$utils.commonUtils.tweenRandom(1, 2),
+			bgIndex: this.$utils.commonUtils.tweenRandom(1, 4),
 			bgEffect: {
 				1: 'flyStart'
 			},
@@ -180,8 +182,10 @@ export default {
 				]
 			},
 			bgImgList: [
-				require('@/assets/images/bg1.jpeg'),
-				require('@/assets/images/bg2.jpeg')
+				require('@/assets/images/bg1.png'),
+				require('@/assets/images/bg2.png'),
+				require('@/assets/images/bg3.png'),
+				require('@/assets/images/bg4.png')
 			]
 		}
 	},
@@ -309,7 +313,7 @@ export default {
 			right 0
 			bottom 0
 			background-repeat no-repeat
-			background-size cover
+			background-size contain
 			background-position center
 
 		.title-wrapper-box
@@ -331,6 +335,9 @@ export default {
 					color #fff
 					text-align center
 					z-index 100
+					-webkit-background-clip text
+					-webkit-text-fill-color transparent
+					transition --loginBtn-start 3s, --loginBtn-end 3s
 
 				.cat-img
 					position absolute
@@ -349,7 +356,7 @@ export default {
 			border-radius 5px
 			box-shadow 0px 2px 10px rgba(0, 0, 0, .3)
 			background rgba(255, 255, 255, .3)
-			backdrop-filter blur(5px)
+			backdrop-filter blur(10px)
 			z-index 100
 
 			& >>> .el-form-item__label
@@ -358,7 +365,7 @@ export default {
 
 			.input-item-container
 				& >>> .el-form-item__label
-					color #fff
+					color #333
 
 				& >>> .el-form-item__error
 					display none
@@ -415,6 +422,7 @@ export default {
 				color #fff
 
 				.reset-password-btn
+					color #333
 					margin-top 5px
 					cursor pointer
 
