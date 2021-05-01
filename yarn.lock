@@ -1342,6 +1342,12 @@ ansi-escapes@^3.0.0, ansi-escapes@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npm.taobao.org/ansi-escapes/download/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
 
+ansi-escapes@^4.3.1:
+  version "4.3.2"
+  resolved "https://registry.npm.taobao.org/ansi-escapes/download/ansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
+  dependencies:
+    type-fest "^0.21.3"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.npm.taobao.org/ansi-html/download/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
@@ -2318,6 +2324,10 @@ ci-info@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/ci-info/download/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
 
+ci-info@^3.0.0:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/ci-info/download/ci-info-3.1.1.tgz#9a32fcefdf7bcdb6f0a7e1c0f8098ec57897b80a"
+
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/cipher-base/download/cipher-base-1.0.4.tgz#8760e4ecc272f4c363532f926d874aae2c1397de"
@@ -2574,6 +2584,10 @@ configstore@^4.0.0:
 connect-history-api-fallback@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npm.taobao.org/connect-history-api-fallback/download/connect-history-api-fallback-1.6.0.tgz#8b32089359308d111115d81cad3fceab888f97bc"
+
+consola@^2.15.0:
+  version "2.15.3"
+  resolved "https://registry.npm.taobao.org/consola/download/consola-2.15.3.tgz#2e11f98d6a4be71ff72e0bdf07bd23e12cb61550"
 
 console-browserify@^1.1.0:
   version "1.2.0"
@@ -3906,6 +3920,12 @@ figgy-pudding@^3.5.1:
 figures@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/figures/download/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
+  dependencies:
+    escape-string-regexp "^1.0.5"
+
+figures@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npm.taobao.org/figures/download/figures-3.2.0.tgz#625c18bd293c604dc4a8ddb2febf0c88341746af"
   dependencies:
     escape-string-regexp "^1.0.5"
 
@@ -7064,6 +7084,10 @@ pretty-error@^2.0.2:
     renderkid "^2.0.1"
     utila "~0.4"
 
+pretty-time@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/pretty-time/download/pretty-time-1.1.0.tgz#ffb7429afabb8535c346a34e41873adf3d74dd0e"
+
 printj@~1.1.0, printj@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/printj/download/printj-1.1.2.tgz#d90deb2975a8b9f600fb3a1c94e3f4c53c78a222"
@@ -8070,6 +8094,12 @@ static-extend@^0.1.1:
   version "1.5.0"
   resolved "https://registry.npm.taobao.org/statuses/download/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
 
+std-env@^2.2.1:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/std-env/download/std-env-2.3.0.tgz#66d4a4a4d5224242ed8e43f5d65cfa9095216eee"
+  dependencies:
+    ci-info "^3.0.0"
+
 stealthy-require@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/stealthy-require/download/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
@@ -8617,6 +8647,10 @@ type-check@~0.3.2:
   resolved "https://registry.npm.taobao.org/type-check/download/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
   dependencies:
     prelude-ls "~1.1.2"
+
+type-fest@^0.21.3:
+  version "0.21.3"
+  resolved "https://registry.nlark.com/type-fest/download/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
 
 type-fest@^0.3.0:
   version "0.3.1"
@@ -9168,6 +9202,19 @@ webpack@^4.0.0, webpack@^4.18.0:
     watchpack "^1.6.0"
     webpack-sources "^1.4.1"
 
+webpackbar@^5.0.0-3:
+  version "5.0.0-3"
+  resolved "https://registry.npm.taobao.org/webpackbar/download/webpackbar-5.0.0-3.tgz#f4f96c8fb13001b2bb1348252db4c980ab93aaac"
+  dependencies:
+    ansi-escapes "^4.3.1"
+    chalk "^4.1.0"
+    consola "^2.15.0"
+    figures "^3.2.0"
+    pretty-time "^1.1.0"
+    std-env "^2.2.1"
+    text-table "^0.2.0"
+    wrap-ansi "^7.0.0"
+
 websocket-driver@>=0.5.1:
   version "0.7.3"
   resolved "https://registry.npm.taobao.org/websocket-driver/download/websocket-driver-0.7.3.tgz#a2d4e0d4f4f116f1e6297eba58b05d430100e9f9"
@@ -9250,6 +9297,14 @@ wrap-ansi@^5.1.0:
 wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npm.taobao.org/wrap-ansi/download/wrap-ansi-6.2.0.tgz?cache=0&sync_timestamp=1573488536792&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwrap-ansi%2Fdownload%2Fwrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
+
+wrap-ansi@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.npm.taobao.org/wrap-ansi/download/wrap-ansi-7.0.0.tgz?cache=0&sync_timestamp=1618558923406&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwrap-ansi%2Fdownload%2Fwrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

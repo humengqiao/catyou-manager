@@ -2,6 +2,7 @@ const path = require('path')
 const feedUrl = require('./src/config/app-update').feedUrl
 const RuleSet = require('webpack/lib/RuleSet')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const WebpackBar = require('webpackbar')
 
 const resolve = dir => {
   return path.join(__dirname, dir)
@@ -69,7 +70,10 @@ module.exports = {
 		// 	.use(TestPlugin)
 	},
 	configureWebpack: config => {
-		const plugins = []
+		const plugins = [
+			new WebpackBar()
+		]
+
 		// 利用环境变量进行判断是否是生产环境production
 		if(process.env.NODE_ENV === 'production') {
 			config.externals = {

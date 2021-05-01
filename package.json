@@ -30,7 +30,7 @@
     "build:codingnet": "vue-cli-service build --mode codingnet",
     "pack:gh-pages": "rimraf docs && npm run build:gh-pages && sync-glob dist/ docs/",
     "pack:codingnet": "rimraf docs-codingnet && npm run build:codingnet && sync-glob dist-codingnet/ docs-codingnet/",
-    "pack:all": "npm run pack:gh-pages && npm run pack:codingnet",
+    "pack-all": "npm run pack:gh-pages && npm run pack:codingnet",
     "deploy:gh-pages": "bash ./scripts/deploy-gh-pages.sh"
   },
   "dependencies": {
@@ -72,7 +72,8 @@
     "vue-cli-plugin-electron-builder": "^1.4.4",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^4.4.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpackbar": "^5.0.0-3"
   },
   "eslintConfig": {
     "root": true,
@@ -87,7 +88,7 @@
       "no-console": 0,
       "no-debugger": 0,
       "no-unsafe-finally": 0,
-			"no-undef": 0
+      "no-undef": 0
     },
     "parserOptions": {
       "parser": "babel-eslint"

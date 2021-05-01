@@ -10,4 +10,4 @@ console.log('%c ',
 	border-radius: 4px;
   color: transparent;`)
 
-console.log('%c Cat You Brand Released, Wish you work happily', 'margin-left: 10px;padding-right: 5px;font-size: 20px;color: #fff;background-image: linear-gradient(to right, #e92758, #ff9569);border-radius: 4px;')
+console.log('%c Cat You Brand Released, All Right Reserved', 'margin-left: 10px;padding-right: 5px;font-size: 20px;color: #fff;background-image: linear-gradient(to right, #e92758, #ff9569);border-radius: 4px;')
