@@ -73,12 +73,15 @@
 					prop="supplier"></el-table-column>
 				<el-table-column label="采购链接">
 					<template slot-scope="scope">
-						<a
-							:key="index"
-							v-for="(item, index) in scope.row.buyLink"
-							:href="item.url | filterLink"
-							target="_blank"
-							style="display: block;color: #579ef8;">{{ item.name }}</a>
+						<template v-if="scope.row.buyLink.filter(({ name, url }) => name && url).length > 0">
+							<a
+								:key="index"
+								v-for="(item, index) in scope.row.buyLink"
+								:href="item.url | filterLink"
+								target="_blank"
+								style="display: block;color: #579ef8;">{{ item.name }}</a>
+						</template>
+						<span v-else>暂无</span>
 					</template>
 				</el-table-column>
 				<el-table-column
@@ -181,6 +184,7 @@
 					<el-input
 						v-model="form.desc"
 						type="textarea"
+						rows="6"
 						placeholder="请输入产品描述"></el-input>
 				</el-form-item>
 				<el-form-item
@@ -730,6 +734,8 @@ export default {
 			const valid = await this.$refs.newProductionFormRef.validate()
 			if(!valid) return
 
+			form.buyLink = form.buyLink.filter(({ name, url }) => name && url)
+
 			if(opType === 'add') {
 				try {
 					this.addProductionLoading = true
@@ -1242,6 +1248,9 @@ export default {
 		& >>> .el-dialog__body
 			overflow-y auto
 			max-height 500px
+
+		& >>> .el-upload-list__item-delete .el-icon-delete
+			font-size 18px
 
 	.production-out-in-coming-graph-container
 		.panel-container

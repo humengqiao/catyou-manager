@@ -30,7 +30,7 @@
     "build:codingnet": "vue-cli-service build --mode codingnet",
     "pack:gh-pages": "rimraf docs && npm run build:gh-pages && sync-glob dist/ docs/",
     "pack:codingnet": "rimraf docs-codingnet && npm run build:codingnet && sync-glob dist-codingnet/ docs-codingnet/",
-    "pack-all": "npm run pack:gh-pages && npm run pack:codingnet",
+    "pack:all": "npm run pack:gh-pages && npm run pack:codingnet",
     "deploy:gh-pages": "bash ./scripts/deploy-gh-pages.sh"
   },
   "dependencies": {
