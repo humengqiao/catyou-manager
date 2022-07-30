@@ -61,4 +61,5 @@ export default {
 
 		.router-content-container
 			flex 1
+			width 0
 </style>
